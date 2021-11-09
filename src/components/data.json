@@ -1,0 +1,17 @@
+[	
+    { 
+      "id": 1,
+      "displayText": "laundry",
+      "completed": true
+    },
+    { 
+      "id": 2,
+      "displayText": "grocery shopping",
+      "completed": true
+    },
+    { 
+      "id": 3,
+      "displayText": "take a dentist appointment",
+      "completed": false
+    }
+]
