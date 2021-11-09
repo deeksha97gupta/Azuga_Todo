@@ -1,33 +1,36 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import "./newTodoForm.css";
 import { todoType } from "./TodoList"
 
+
 interface formProps {
-    createData(data: todoType): void;
+    createTodo(indexValue: todoType): void;
 }
-const NewTodoForm = ({ createData }: formProps) => {
-  const [userInput, setUserInput] = useState<string>("");
-
-  const inputHandler = (enteredText: string) => {
-    setUserInput(enteredText);
-   };
-
-  const handleSubmit = () => {
-    const data = {
-        id: Math.floor(Math.random() * 100),
-        task: userInput,
-        completed: false
+function NewTodoForm({ createTodo }: formProps) {
+  const [userInput, setUserInput] = useReducer(
+    (state: any, newState: any) => ({ ...state, ...newState }),
+    {
+      task: ""
     }
-    createData(data);
-    setUserInput("");
+  );
+
+  const handleChange = (evt: any) => {
+    setUserInput({ [evt.target.name]: evt.target.value });
+  };
+
+  const handleSubmit = (evt:any) => {
+    evt.preventDefault();
+    const newTodo = { id: Math.floor(Math.random() * 100), task: userInput.task, completed: false };
+    createTodo(newTodo);
+    setUserInput({ task: "" });
   };
 
   return (
-    <form className="NewTodoForm" onSubmit={() => handleSubmit}>
-      <label >New todo</label>
+    <form className="NewTodoForm" onSubmit={handleSubmit}>
+      <label htmlFor="task">New todo</label>
       <input
-        value={userInput}
-        onChange={(evt) => inputHandler(evt.target.value)}
+        value={userInput.task}
+        onChange={handleChange}
         id="task"
         type="text"
         name="task"

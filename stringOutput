@@ -1,0 +1,11 @@
+var str = "Aaabccddda";
+var strArr = str.split("");
+
+for (let i=0; i<(strArr.length-1); i++) {
+  if(strArr[i] === strArr[i+1]) {
+    strArr.splice(i,2);
+    i=-1;
+  }
+}
+
+console.log(strArr.join(""));    
