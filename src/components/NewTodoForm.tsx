@@ -20,8 +20,10 @@ function NewTodoForm({ createTodo }: formProps) {
 
   const handleSubmit = (evt:any) => {
     evt.preventDefault();
-    const newTodo = { id: Math.floor(Math.random() * 100), task: userInput.task, completed: false };
-    createTodo(newTodo);
+    if (userInput.task !== "") {
+      const newTodo = { id: Math.floor(Math.random() * 100), task: userInput.task, completed: false };
+      createTodo(newTodo);
+    }
     setUserInput({ task: "" });
   };
 
